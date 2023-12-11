@@ -1,0 +1,48 @@
+<form name="myf" action="/datasave/" method="post">
+		name<input type="text" name="sname"><br>
+		city<input type="text" name="scity"><br>
+		email<input type="text" name="semail"><br>
+		<input type="Submit" value="save">
+	</form>
+<form  action="/Contact/" method="post" >
+	{% csrf_token %}
+		 <div class="form-group">
+	    <label for="name">Name</label>
+	    <input type="text" class="form-control" id="name" name="name" aria-describedby="name" placeholder="Enter Name">
+	    
+	  </div>
+	  <div class="form-group">
+	    <label name="email">Email address</label>
+	    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+	    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+	  </div>
+	  <div class="form-group">
+	    <label for="phone">Phone No</label>
+	    <input type="Phone No" class="form-control" id="phone" name="phone" placeholder="phone no">
+	  </div>
+	   <div class="form-group">
+	    <label for="content">Describe me Your issue</label>
+	    
+	    <textarea  class='form-control' name="content" id="content" name="content" rows="5" cols="20"></textarea>
+	    <small id="emailHelp" class="form-text text-muted"></small>
+	  </div>
+	  <button type="submit" class="btn btn-primary">Submit</button>
+	</form>
+name=request.POST.get('name')
+	email=request.POST.get('email')
+	phone=request.POST.get('phone')
+	content=request.POST.get('content')
+		
+	obj=contact(name=name,email=email,phone=phone,content=content)
+	obj.save()
+
+
+
+
+
+
+
+
+
+
+	blog home 

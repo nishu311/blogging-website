@@ -1,0 +1,141 @@
+{% extends 'base.html'%}
+{% block title %} blog-post {%endblock title %}
+{% block body %}
+
+
+<style type="text/css">
+  
+  .btn{
+    color: white;
+    background-color: blue;
+  }
+.button {
+  --c:  #229091; /* the color*/
+  
+  box-shadow: 0 0 0 .1em inset var(--c); 
+  --_g: linear-gradient(var(--c) 0 0) no-repeat;
+  background: 
+    var(--_g) calc(var(--_p,0%) - 100%) 0%,
+    var(--_g) calc(200% - var(--_p,0%)) 0%,
+    var(--_g) calc(var(--_p,0%) - 100%) 100%,
+    var(--_g) calc(200% - var(--_p,0%)) 100%;
+  background-size: 50.5% calc(var(--_p,0%)/2 + .5%);
+  outline-offset: .1em;
+  transition: background-size .4s, background-position 0s .4s;
+}
+.button:hover {
+  --_p: 100%;
+  transition: background-position .4s, background-size 0s;
+}
+.button:active {
+  box-shadow: 0 0 9e9q inset #0009; 
+  background-color: var(--c);
+  color: #fff;
+}
+
+
+
+
+
+.button {
+  font-family: system-ui, sans-serif;
+  font-size: 30px;
+  cursor: pointer;
+  padding: .1em .6em;
+  font-weight: bold;  
+  border: none;
+}
+  .hi{
+    color: blue;
+    font-size: 20px;
+  }
+  .img{
+    margin-right: 600px;
+    height: 400px;
+    width: 1100px;
+  }
+  .c{
+    text-align: left;
+
+  }
+  
+.pc{
+  font-size: 20px;
+}
+</style>
+
+    
+<div class="container">
+      <h1>PYTHON</h1>
+      
+
+
+  <div class="row mb-2">
+    <div class="col-md-12">
+      <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative my-4">
+        <div class="col p-4 d-flex flex-column position-static">
+          <strong class="d-inline-block mb-2 text-primary-emphasis"> </strong>
+          <img class="img" src="https://math.duke.edu/sites/math.duke.edu/files/styles/large/public/images/Featured%20Courses%20MTH%20260%20Python%20Programming%20in%20Math%20image.jpg.png?itok=kTIwZdBL">
+          <h2 class="h mb-0 my-4">Introduction Python</h1>
+          <div class="mb-1 text-body-secondary">Python is a popular programming language. It was created by Guido van Rossum, and released in 1991.</div>
+          <li>
+            web development (server-side)</li>
+           <li> software development</li>
+           <li> mathematics,</li>
+           <li> system scripting.</li>
+           <h2 class="h">What can Python do?</h2>
+           <li>Python can be used on a server to create web applications.</li>
+           <li>Python can be used alongside software to create workflows.</li>
+           <li>Python can connect to database systems. It can also read and modify files.</li>
+           <li>Python can be used to handle big data and perform complex mathematics.</li>
+          <li>Python can be used for rapid prototyping, or for production-ready software development.</li>
+          <h2 class="h">Why Python</h2>
+          <li>Python works on different platforms (Windows, Mac, Linux, Raspberry Pi, etc).</li>
+          <li> Python has a simple syntax similar to the English language.</li>
+          <li>Python has syntax that allows developers to write programs with fewer lines than some other programming languages.</li>
+          <li> Python runs on an interpreter system, meaning that code can be executed as soon as it is written. This means that prototyping can be very quick.</li>
+          <li>Python can be treated in a procedural way, an object-oriented way or a functional way.</li>
+          <p>Python was designed for readability, and has some similarities to the English language with influence from mathematics.Python uses new lines to complete a command, as opposed to other programming languages which often use semicolons or parentheses.Python relies on indentation, using whitespace, to define scope; such as the scope of loops, functions and classes. Other programming languages often use curly-brackets for this purpose.</p>
+
+          
+          
+        </div>
+      
+      </div>
+</div>
+<div class="container">
+      <h2> Comments ({{ comments.count}})</h2>
+      <div class="my-3">
+      {% if user.is_authenticated %}
+      <form action="{% url 'postComment' %}" method="post" class="form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="exampleInputEmail" class="hi mx-4">Post Comment</label>
+            <input type="text" name="comment" placeholder="Enter comment here" class="pc">
+        </div>
+          <input type="hidden" name="postSno" value="{{post.sno}}" >
+          <input type="submit" value="Submit" class="button">
+
+
+      </form>
+      {%  else %}
+      Please login to post the comments
+      {% endif %}
+    {% for comment in comments %}
+    <div class="row my-3">
+        <div class="col-md-1  ">
+        <img class="rounded mx-auto d-block w-100 p-2" src="/static/images/user.png"  alt="user">
+        </div>
+        <div class="col-md-11 "> 
+        <b> {{comment.user.username}} </b> at {{comment.timestamp}}
+        <div>   {{comment.comment}} </div>
+    </div>
+    </div>
+
+
+    {% endfor %}
+
+    
+</div>
+
+{% endblock body %}
